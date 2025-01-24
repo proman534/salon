@@ -15,6 +15,7 @@ class BookAppointmentPage extends StatefulWidget {
     required this.serviceName,
   });
 
+  @override
   _BookAppointmentPageState createState() => _BookAppointmentPageState();
 
   @override

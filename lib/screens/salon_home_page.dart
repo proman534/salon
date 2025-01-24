@@ -75,10 +75,10 @@ class _HomePageState extends State<SalonHomePage> {
     return BaseScaffold(
       title: 'Home',
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -86,8 +86,8 @@ class _HomePageState extends State<SalonHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Nearby Salons Section
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.0),
                       child: Text(
                         'Nearby Salons',
                         style: TextStyle(
@@ -98,8 +98,9 @@ class _HomePageState extends State<SalonHomePage> {
                     if (salons.isNotEmpty)
                       GridView.builder(
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
@@ -118,10 +119,10 @@ class _HomePageState extends State<SalonHomePage> {
                       ),
                     // If salons are empty, display a message
                     if (salons.isEmpty)
-                      Center(child: Text("No salons available")),
+                      const Center(child: Text("No salons available")),
                     // Our Services Section
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.0),
                       child: Text(
                         'Our Services',
                         style: TextStyle(
@@ -132,8 +133,9 @@ class _HomePageState extends State<SalonHomePage> {
                     if (services.isNotEmpty)
                       GridView.builder(
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
@@ -151,7 +153,7 @@ class _HomePageState extends State<SalonHomePage> {
                       ),
                     // If services are empty, display a message
                     if (services.isEmpty)
-                      Center(child: Text("No services available")),
+                      const Center(child: Text("No services available")),
                   ],
                 ),
               ),
@@ -166,11 +168,11 @@ class SalonCard extends StatelessWidget {
   final Map<String, dynamic> salon; // Add the salon parameter
 
   const SalonCard({
-    Key? key,
+    super.key,
     required this.name,
     required this.imageUrl,
     required this.salon, // Initialize the salon parameter
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +183,7 @@ class SalonCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
             child: Image.asset(
               imageUrl,
               height: 150,
@@ -193,7 +195,7 @@ class SalonCard extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               name,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
           ),
@@ -219,7 +221,7 @@ class SalonCard extends StatelessWidget {
                 ),
               );
             },
-            child: Text('Explore Salon'),
+            child: const Text('Explore Salon'),
           ),
         ],
       ),
@@ -232,10 +234,10 @@ class ServiceCard extends StatelessWidget {
   final String imageUrl;
 
   const ServiceCard({
-    Key? key,
+    super.key,
     required this.name,
     required this.imageUrl,
-  }) : super(key: key);
+  });
 
   get salon => null;
 
@@ -250,7 +252,7 @@ class ServiceCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
             child: Image.asset(
               imageUrl,
               height: 150,
@@ -262,7 +264,7 @@ class ServiceCard extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               name,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
           ),
@@ -270,7 +272,7 @@ class ServiceCard extends StatelessWidget {
             onPressed: () {
               // Handle "Book Service" action here
             },
-            child: Text('Book Service'),
+            child: const Text('Book Service'),
           ),
         ],
       ),

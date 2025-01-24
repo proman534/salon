@@ -14,6 +14,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -22,17 +24,16 @@ class MyApp extends StatelessWidget {
         title: 'Salon App',
         initialRoute: '/',
         routes: {
-          '/' : (context) => SalonHomePage(),
-          '/salon_home_page':(context) => SalonHomePage(),
+          '/': (context) => const SalonHomePage(),
+          '/salon_home_page': (context) => const SalonHomePage(),
           '/signup_customer': (context) => SignupCustomer(),
           '/login_page': (context) => LoginPage(),
           '/signup_salon_owner': (context) => SignupSalonOwner(),
           '/customer_home': (context) => CustomerHomeScreen(),
           '/salon_owner_home': (context) => SalonOwnerScreen(),
-          '/profilePage':(context)=> ProfilePage(),
+          '/profilePage': (context) => ProfilePage(),
         },
       ),
     );
   }
 }
-
