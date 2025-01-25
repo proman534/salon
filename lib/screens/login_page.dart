@@ -134,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              SignupCustomer()), // Navigate to the customer signup page
+                                              const SignupCustomer()), // Navigate to the customer signup page
                                     );
                                   },
                                   child: const Text('Sign up as a Customer'),
@@ -146,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              SignupSalonOwner()), // Navigate to the owner signup page
+                                              const SignupSalonOwner()), // Navigate to the owner signup page
                                     );
                                   },
                                   child: const Text('Sign up as an Owner'),

@@ -126,7 +126,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  LoginPage()), // Navigate to SignUpPage
+                                  const LoginPage()), // Navigate to SignUpPage
                         );
                       },
                       child: const Text('Already have an account, login.'),
@@ -150,8 +150,9 @@ class _SignupCustomerState extends State<SignupCustomer> {
                                   decoration: const InputDecoration(
                                       labelText: 'Username'),
                                   validator: (value) {
-                                    if (value!.isEmpty)
+                                    if (value!.isEmpty) {
                                       return 'Please enter username';
+                                    }
                                     return null;
                                   },
                                 ),
@@ -161,8 +162,9 @@ class _SignupCustomerState extends State<SignupCustomer> {
                                   decoration: const InputDecoration(
                                       labelText: 'Password'),
                                   validator: (value) {
-                                    if (value!.isEmpty)
+                                    if (value!.isEmpty) {
                                       return 'Please enter password';
+                                    }
                                     return null;
                                   },
                                   obscureText: true,

@@ -5,8 +5,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:startup/screens/salon_details.dart';
 
-import 'book_appointment.dart';
-
 class SalonHomePage extends StatefulWidget {
   const SalonHomePage({super.key});
 
