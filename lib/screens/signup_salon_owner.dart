@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class SignupSalonOwner extends StatefulWidget {
+  const SignupSalonOwner({super.key});
+
   @override
   _SignupSalonOwnerState createState() => _SignupSalonOwnerState();
 }
@@ -45,11 +47,11 @@ class _SignupSalonOwnerState extends State<SignupSalonOwner> {
     );
 
     if (response.statusCode == 201) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Salon Owner registered successfully!'),
       ));
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Failed to register salon owner.'),
       ));
     }
@@ -58,17 +60,16 @@ class _SignupSalonOwnerState extends State<SignupSalonOwner> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Salon Owner Signup")),
+      appBar: AppBar(title: const Text("Salon Owner Signup")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-
         child: Form(
           key: _formKey,
           child: Column(
             children: [
               TextFormField(
                 controller: usernameController,
-                decoration: InputDecoration(labelText: 'Username'),
+                decoration: const InputDecoration(labelText: 'Username'),
                 validator: (value) {
                   if (value!.isEmpty) return 'Please enter username';
                   return null;
@@ -76,7 +77,7 @@ class _SignupSalonOwnerState extends State<SignupSalonOwner> {
               ),
               TextFormField(
                 controller: passwordController,
-                decoration: InputDecoration(labelText: 'Password'),
+                decoration: const InputDecoration(labelText: 'Password'),
                 validator: (value) {
                   if (value!.isEmpty) return 'Please enter password';
                   return null;
@@ -85,47 +86,47 @@ class _SignupSalonOwnerState extends State<SignupSalonOwner> {
               ),
               TextFormField(
                 controller: salonNameController,
-                decoration: InputDecoration(labelText: 'Salon Name'),
+                decoration: const InputDecoration(labelText: 'Salon Name'),
               ),
               TextFormField(
                 controller: firstNameController,
-                decoration: InputDecoration(labelText: 'First Name'),
+                decoration: const InputDecoration(labelText: 'First Name'),
               ),
               TextFormField(
                 controller: lastNameController,
-                decoration: InputDecoration(labelText: 'Last Name'),
+                decoration: const InputDecoration(labelText: 'Last Name'),
               ),
               TextFormField(
                 controller: emailController,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(labelText: 'Email'),
               ),
               TextFormField(
                 controller: phoneController,
-                decoration: InputDecoration(labelText: 'Phone Number'),
+                decoration: const InputDecoration(labelText: 'Phone Number'),
               ),
               TextFormField(
                 controller: genderController,
-                decoration: InputDecoration(labelText: 'Gender'),
+                decoration: const InputDecoration(labelText: 'Gender'),
               ),
               TextFormField(
                 controller: addressLineController,
-                decoration: InputDecoration(labelText: 'Address Line'),
+                decoration: const InputDecoration(labelText: 'Address Line'),
               ),
               TextFormField(
                 controller: cityController,
-                decoration: InputDecoration(labelText: 'City'),
+                decoration: const InputDecoration(labelText: 'City'),
               ),
               TextFormField(
                 controller: stateController,
-                decoration: InputDecoration(labelText: 'State'),
+                decoration: const InputDecoration(labelText: 'State'),
               ),
               TextFormField(
                 controller: pinCodeController,
-                decoration: InputDecoration(labelText: 'Pin Code'),
+                decoration: const InputDecoration(labelText: 'Pin Code'),
               ),
               TextFormField(
                 controller: countryController,
-                decoration: InputDecoration(labelText: 'Country'),
+                decoration: const InputDecoration(labelText: 'Country'),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -133,7 +134,7 @@ class _SignupSalonOwnerState extends State<SignupSalonOwner> {
                     registerSalonOwner();
                   }
                 },
-                child: Text('Register'),
+                child: const Text('Register'),
               ),
             ],
           ),

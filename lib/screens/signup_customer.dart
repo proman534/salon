@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:startup/screens/login_page.dart';
 
 class SignupCustomer extends StatefulWidget {
+  const SignupCustomer({super.key});
+
   @override
   _SignupCustomerState createState() => _SignupCustomerState();
 }
@@ -30,7 +32,8 @@ class _SignupCustomerState extends State<SignupCustomer> {
 
   Future<void> registerCustomer() async {
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:5000/register/customer'), // Your Flask API endpoint
+      Uri.parse(
+          'http://10.0.2.2:5000/register/customer'), // Your Flask API endpoint
       headers: {'Content-Type': 'application/json'},
       body: json.encode({
         'username': usernameController.text,
@@ -55,11 +58,12 @@ class _SignupCustomerState extends State<SignupCustomer> {
       );
       Navigator.pushNamed(context, '/login_page');
     } else {
-      final Map<String, dynamic>? errorResponse = response.body.isNotEmpty
-          ? json.decode(response.body)
-          : null;
-      final String errorMessage = errorResponse?['message'] ?? 'Failed to register customer.';
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)));
+      final Map<String, dynamic>? errorResponse =
+          response.body.isNotEmpty ? json.decode(response.body) : null;
+      final String errorMessage =
+          errorResponse?['message'] ?? 'Failed to register customer.';
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(errorMessage)));
     }
   }
 
@@ -67,15 +71,15 @@ class _SignupCustomerState extends State<SignupCustomer> {
     return InputDecoration(
       labelText: label,
       filled: true,
-      fillColor: Color(0xFFe0e5ec), // Light grey background
+      fillColor: const Color(0xFFe0e5ec), // Light grey background
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
         borderSide: BorderSide.none,
       ),
-      contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: Colors.blueAccent, width: 2),
+        borderSide: const BorderSide(color: Colors.blueAccent, width: 2),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
@@ -102,9 +106,10 @@ class _SignupCustomerState extends State<SignupCustomer> {
               child: Form(
                 key: _formKey,
                 child: Column(
-                  mainAxisSize: MainAxisSize.min, // Ensure column doesn't take up full height
+                  mainAxisSize: MainAxisSize
+                      .min, // Ensure column doesn't take up full height
                   children: [
-                    Text(
+                    const Text(
                       'Signup',
                       style: TextStyle(
                         fontSize: 24,
@@ -112,17 +117,21 @@ class _SignupCustomerState extends State<SignupCustomer> {
                         color: Colors.blue,
                       ),
                     ),
-                    SizedBox(height: 16), // Space between the login button and the sign-up link
+                    const SizedBox(
+                        height:
+                            16), // Space between the login button and the sign-up link
                     TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => LoginPage()), // Navigate to SignUpPage
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const LoginPage()), // Navigate to SignUpPage
                         );
                       },
                       child: const Text('Already have an account, login.'),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Expanded(
                       child: PageView(
                         controller: _pageController,
@@ -138,41 +147,51 @@ class _SignupCustomerState extends State<SignupCustomer> {
                               children: [
                                 TextFormField(
                                   controller: usernameController,
-                                  decoration: InputDecoration(labelText:'Username'),
+                                  decoration: const InputDecoration(
+                                      labelText: 'Username'),
                                   validator: (value) {
-                                    if (value!.isEmpty) return 'Please enter username';
+                                    if (value!.isEmpty) {
+                                      return 'Please enter username';
+                                    }
                                     return null;
                                   },
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 TextFormField(
                                   controller: passwordController,
-                                  decoration: InputDecoration(labelText:'Password'),
+                                  decoration: const InputDecoration(
+                                      labelText: 'Password'),
                                   validator: (value) {
-                                    if (value!.isEmpty) return 'Please enter password';
+                                    if (value!.isEmpty) {
+                                      return 'Please enter password';
+                                    }
                                     return null;
                                   },
                                   obscureText: true,
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 TextFormField(
                                   controller: firstNameController,
-                                  decoration: InputDecoration(labelText: 'First Name'),
+                                  decoration: const InputDecoration(
+                                      labelText: 'First Name'),
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 TextFormField(
                                   controller: lastNameController,
-                                  decoration: InputDecoration(labelText:'Last Name'),
+                                  decoration: const InputDecoration(
+                                      labelText: 'Last Name'),
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 TextFormField(
                                   controller: emailController,
-                                  decoration: InputDecoration(labelText:'Email'),
+                                  decoration:
+                                      const InputDecoration(labelText: 'Email'),
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 TextFormField(
                                   controller: phoneController,
-                                  decoration: InputDecoration(labelText:'Phone Number'),
+                                  decoration: const InputDecoration(
+                                      labelText: 'Phone Number'),
                                 ),
                               ],
                             ),
@@ -183,37 +202,44 @@ class _SignupCustomerState extends State<SignupCustomer> {
                               children: [
                                 TextFormField(
                                   controller: genderController,
-                                  decoration: InputDecoration(labelText:'Gender'),
+                                  decoration: const InputDecoration(
+                                      labelText: 'Gender'),
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 TextFormField(
                                   controller: dateOfBirthController,
-                                  decoration: InputDecoration(labelText:'Date of Birth'),
+                                  decoration: const InputDecoration(
+                                      labelText: 'Date of Birth'),
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 TextFormField(
                                   controller: addressLineController,
-                                  decoration: InputDecoration(labelText:'Address Line'),
+                                  decoration: const InputDecoration(
+                                      labelText: 'Address Line'),
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 TextFormField(
                                   controller: cityController,
-                                  decoration: InputDecoration(labelText:'City'),
+                                  decoration:
+                                      const InputDecoration(labelText: 'City'),
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 TextFormField(
                                   controller: stateController,
-                                  decoration: InputDecoration(labelText:'State'),
+                                  decoration:
+                                      const InputDecoration(labelText: 'State'),
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 TextFormField(
                                   controller: pinCodeController,
-                                  decoration: InputDecoration(labelText:'Pin Code'),
+                                  decoration: const InputDecoration(
+                                      labelText: 'Pin Code'),
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 TextFormField(
                                   controller: countryController,
-                                  decoration: InputDecoration(labelText:'Country'),
+                                  decoration: const InputDecoration(
+                                      labelText: 'Country'),
                                 ),
                               ],
                             ),
@@ -228,23 +254,23 @@ class _SignupCustomerState extends State<SignupCustomer> {
                           ElevatedButton(
                             onPressed: () {
                               _pageController.previousPage(
-                                duration: Duration(milliseconds: 300),
+                                duration: const Duration(milliseconds: 300),
                                 curve: Curves.easeInOut,
                               );
                             },
-                            child: Text('Back'),
+                            child: const Text('Back'),
                           ),
                         if (currentPage < 1)
                           ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 _pageController.nextPage(
-                                  duration: Duration(milliseconds: 300),
+                                  duration: const Duration(milliseconds: 300),
                                   curve: Curves.easeInOut,
                                 );
                               }
                             },
-                            child: Text('Next'),
+                            child: const Text('Next'),
                           ),
                         if (currentPage == 1)
                           ElevatedButton(
@@ -253,7 +279,7 @@ class _SignupCustomerState extends State<SignupCustomer> {
                                 registerCustomer();
                               }
                             },
-                            child: Text('Register'),
+                            child: const Text('Register'),
                           ),
                       ],
                     ),

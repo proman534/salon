@@ -9,15 +9,16 @@ import 'customer_home_screen.dart';
 import 'signup_customer.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final inputController = TextEditingController(); // Single field for username, email, or phone
+  final inputController =
+      TextEditingController(); // Single field for username, email, or phone
   final passwordController = TextEditingController();
-
-
 
   Future<void> loginUser() async {
     try {
@@ -25,7 +26,8 @@ class _LoginPageState extends State<LoginPage> {
         Uri.parse('http://10.0.2.2:5000/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
-          'identifier': inputController.text.trim(), // Remove unnecessary spaces
+          'identifier':
+              inputController.text.trim(), // Remove unnecessary spaces
           'password': passwordController.text,
         }),
       );
@@ -45,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
         // Navigate to home screen
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => SalonHomePage()),
+          MaterialPageRoute(builder: (context) => const SalonHomePage()),
         );
       } else {
         final error = json.decode(response.body)['error'] ?? 'Unknown error';
@@ -59,7 +61,6 @@ class _LoginPageState extends State<LoginPage> {
       );
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +78,12 @@ class _LoginPageState extends State<LoginPage> {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center, // Center content vertically
-                  crossAxisAlignment: CrossAxisAlignment.center, // Center content horizontally
+                  mainAxisAlignment:
+                      MainAxisAlignment.center, // Center content vertically
+                  crossAxisAlignment:
+                      CrossAxisAlignment.center, // Center content horizontally
                   children: [
-                    Text(
+                    const Text(
                       'Login',
                       style: TextStyle(
                         fontSize: 24,
@@ -88,34 +91,41 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.blue,
                       ),
                     ),
-                    SizedBox(height: 20), // Space between the title and the text fields
+                    const SizedBox(
+                        height:
+                            20), // Space between the title and the text fields
                     TextFormField(
                       controller: inputController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Username, Email, or Phone',
                         hintText: 'Enter your username, email, or phone',
                       ),
                     ),
-                    SizedBox(height: 16), // Space between the fields
+                    const SizedBox(height: 16), // Space between the fields
                     TextFormField(
                       controller: passwordController,
-                      decoration: InputDecoration(labelText: 'Password'),
+                      decoration: const InputDecoration(labelText: 'Password'),
                       obscureText: true,
                     ),
-                    SizedBox(height: 16), // Space between input fields and the button
+                    const SizedBox(
+                        height:
+                            16), // Space between input fields and the button
                     ElevatedButton(
                       onPressed: loginUser,
-                      child: Text('Login'),
+                      child: const Text('Login'),
                     ),
-                    SizedBox(height: 16), // Space between the login button and the sign-up link
+                    const SizedBox(
+                        height:
+                            16), // Space between the login button and the sign-up link
                     TextButton(
                       onPressed: () {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: Text('Sign Up'),
-                              content: Text('Choose the type of account you want to create:'),
+                              title: const Text('Sign Up'),
+                              content: const Text(
+                                  'Choose the type of account you want to create:'),
                               actions: [
                                 ElevatedButton(
                                   onPressed: () {
@@ -123,10 +133,11 @@ class _LoginPageState extends State<LoginPage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => SignupCustomer()), // Navigate to the customer signup page
+                                          builder: (context) =>
+                                              const SignupCustomer()), // Navigate to the customer signup page
                                     );
                                   },
-                                  child: Text('Sign up as a Customer'),
+                                  child: const Text('Sign up as a Customer'),
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
@@ -134,10 +145,11 @@ class _LoginPageState extends State<LoginPage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => SignupSalonOwner()), // Navigate to the owner signup page
+                                          builder: (context) =>
+                                              const SignupSalonOwner()), // Navigate to the owner signup page
                                     );
                                   },
-                                  child: Text('Sign up as an Owner'),
+                                  child: const Text('Sign up as an Owner'),
                                 ),
                               ],
                             );
@@ -146,7 +158,6 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       child: const Text('Don\'t have an account? Sign Up'),
                     ),
-
                   ],
                 ),
               ),

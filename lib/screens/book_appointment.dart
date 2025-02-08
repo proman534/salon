@@ -15,7 +15,7 @@ class BookAppointmentPage extends StatefulWidget {
     required this.serviceName,
   });
 
-
+  @override
   _BookAppointmentPageState createState() => _BookAppointmentPageState();
 
   @override
@@ -42,7 +42,7 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Booking Successful!')),
       );
-      Navigator.pop(context);  // Go back to the previous screen after booking
+      Navigator.pop(context); // Go back to the previous screen after booking
     }
   }
 

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../base.dart';
 
 class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -13,7 +15,8 @@ class _ProfilePageState extends State<ProfilePage> {
     'username': 'JohnDoe',
     'email': 'john.doe@example.com',
     'phone': '123-456-7890',
-    'profilePic': 'https://via.placeholder.com/150', // URL for the profile picture
+    'profilePic':
+        'https://via.placeholder.com/150', // URL for the profile picture
   };
 
   // Mock data for appointments
@@ -60,10 +63,7 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               buildProfilePicture(),
               const SizedBox(height: 20),
-              if (!isEditing)
-                buildProfileInfo()
-              else
-                buildEditForm(),
+              if (!isEditing) buildProfileInfo() else buildEditForm(),
               const SizedBox(height: 30),
               buildAppointments(),
             ],
@@ -87,7 +87,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ? const Icon(Icons.person, size: 50, color: Colors.white)
               : null,
         ),
-
         const SizedBox(height: 10),
         TextButton.icon(
           onPressed: () {
@@ -105,7 +104,8 @@ class _ProfilePageState extends State<ProfilePage> {
     // Logic for changing the profile picture can go here.
     // For now, we show a snackbar as a placeholder.
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Change profile picture feature coming soon!')),
+      const SnackBar(
+          content: Text('Change profile picture feature coming soon!')),
     );
   }
 
@@ -204,15 +204,18 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text('Salon', style: TextStyle(fontWeight: FontWeight.bold)),
+                  child: Text('Salon',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text('Service', style: TextStyle(fontWeight: FontWeight.bold)),
+                  child: Text('Service',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text('Date', style: TextStyle(fontWeight: FontWeight.bold)),
+                  child: Text('Date',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
               ],
             ),
@@ -233,7 +236,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ],
               );
-            }).toList(),
+            }),
           ],
         ),
         if (appointments.isEmpty)

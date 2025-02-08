@@ -6,7 +6,11 @@ class BaseScaffold extends StatefulWidget {
   final String title;
   final Widget body;
 
-  const BaseScaffold({required this.title, required this.body, Key? key, required AppBar appBar}) : super(key: key);
+  const BaseScaffold(
+      {required this.title,
+      required this.body,
+      super.key,
+      required AppBar appBar});
 
   @override
   _BaseScaffoldState createState() => _BaseScaffoldState();
@@ -25,25 +29,25 @@ class _BaseScaffoldState extends State<BaseScaffold> {
         backgroundColor: Colors.blue,
         title: _isSearchActive
             ? TextField(
-          controller: _searchController,
-          autofocus: true,
-          decoration: InputDecoration(
-            hintText: 'Search...',
-            border: InputBorder.none,
-            hintStyle: TextStyle(color: Colors.black),
-            filled: true,
-            fillColor: Colors.white,
-          ),
-          style: TextStyle(color: Colors.black),
-          onChanged: (query) {
-            // You can implement search logic here
-            print('Search query: $query');
-          },
-        )
+                controller: _searchController,
+                autofocus: true,
+                decoration: const InputDecoration(
+                  hintText: 'Search...',
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(color: Colors.black),
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+                style: const TextStyle(color: Colors.black),
+                onChanged: (query) {
+                  // You can implement search logic here
+                  print('Search query: $query');
+                },
+              )
             : Text(widget.title),
         leading: Builder(
           builder: (context) => IconButton(
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
             onPressed: () {
               Scaffold.of(context).openDrawer(); // Open the Drawer
             },
@@ -68,12 +72,17 @@ class _BaseScaffoldState extends State<BaseScaffold> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text(authProvider.isLoggedIn ? authProvider.user?.name ?? 'User' : 'Guest'),
-              accountEmail: Text(authProvider.isLoggedIn ? authProvider.user?.email ?? 'guest@example.com' : 'guest@example.com'),
+              accountName: Text(authProvider.isLoggedIn
+                  ? authProvider.user?.name ?? 'User'
+                  : 'Guest'),
+              accountEmail: Text(authProvider.isLoggedIn
+                  ? authProvider.user?.email ?? 'guest@example.com'
+                  : 'guest@example.com'),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: NetworkImage(
                   authProvider.isLoggedIn
-                      ? authProvider.user?.profilePictureUrl ?? "https://via.placeholder.com/150"
+                      ? authProvider.user?.profilePictureUrl ??
+                          "https://via.placeholder.com/150"
                       : "https://via.placeholder.com/150",
                 ),
               ),
@@ -103,7 +112,8 @@ class _BaseScaffoldState extends State<BaseScaffold> {
               },
             ),
             ListTile(
-              leading: Icon(authProvider.isLoggedIn ? Icons.logout : Icons.login),
+              leading:
+                  Icon(authProvider.isLoggedIn ? Icons.logout : Icons.login),
               title: Text(authProvider.isLoggedIn ? 'Logout' : 'Login'),
               onTap: () {
                 if (authProvider.isLoggedIn) {
