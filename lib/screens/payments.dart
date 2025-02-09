@@ -24,7 +24,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
     }
 
     final url = Uri.parse(
-        "http://YOUR_FLASK_SERVER_IP:5000/api/payments"); // Replace with your backend URL
+        "http://127.0.0.1:5000/api/payments"); // Replace with your backend URL
     final response = await http.post(
       url,
       headers: {
