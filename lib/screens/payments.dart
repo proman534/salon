@@ -4,12 +4,14 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class PaymentsPage extends StatefulWidget {
+  const PaymentsPage({super.key});
+
   @override
   _PaymentsPageState createState() => _PaymentsPageState();
 }
 
 class _PaymentsPageState extends State<PaymentsPage> {
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   final TextEditingController amountController = TextEditingController();
   String selectedMethod = "credit_card";
 
@@ -18,7 +20,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
 
     if (token == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("User not authenticated")),
+        const SnackBar(content: Text("User not authenticated")),
       );
       return;
     }
@@ -53,7 +55,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Make Payment")),
+      appBar: AppBar(title: const Text("Make Payment")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -61,7 +63,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
             TextField(
               controller: amountController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: "Enter Amount"),
+              decoration: const InputDecoration(labelText: "Enter Amount"),
             ),
             DropdownButton<String>(
               value: selectedMethod,
@@ -71,10 +73,10 @@ class _PaymentsPageState extends State<PaymentsPage> {
                   .toList(),
               onChanged: (value) => setState(() => selectedMethod = value!),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: processPayment,
-              child: Text("Pay Now"),
+              child: const Text("Pay Now"),
             ),
           ],
         ),

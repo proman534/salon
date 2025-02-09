@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 import 'package:startup/screens/salon_home_page.dart';
 import 'package:startup/screens/signup_salon_owner.dart';
 import 'dart:convert';
-import '../state/auth_provider.dart';
-import 'customer_home_screen.dart';
 import 'signup_customer.dart';
 
 class LoginPage extends StatefulWidget {
@@ -33,8 +30,8 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (response.statusCode == 200) {
-        final responseData = json.decode(response.body);
-        String token = responseData['token'];
+        // final responseData = json.decode(response.body);
+        // String token = responseData['token'];
         // User user = User(
         //   name: responseData['user']['name'],
         //   email: responseData['user']['email'],
