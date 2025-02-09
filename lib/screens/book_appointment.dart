@@ -18,7 +18,6 @@ class BookAppointmentPage extends StatefulWidget {
   @override
   _BookAppointmentPageState createState() => _BookAppointmentPageState();
 
-  @override
   Widget build(BuildContext context) {
     // TODO: implement build
     throw UnimplementedError();
