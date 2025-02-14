@@ -7,6 +7,8 @@ void main() {
 }
 
 class SalonDashboard extends StatelessWidget {
+  const SalonDashboard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,6 +18,8 @@ class SalonDashboard extends StatelessWidget {
 }
 
 class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
+
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
@@ -51,20 +55,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Salon Dashboard'),
+        title: const Text('Salon Dashboard'),
         actions: [
           TextButton(
             onPressed: () {},
-            child: Text('Profile', style: TextStyle(color: Colors.white)),
+            child: const Text('Profile', style: TextStyle(color: Colors.white)),
           ),
           TextButton(
             onPressed: () {},
-            child: Text('Login', style: TextStyle(color: Colors.white)),
+            child: const Text('Login', style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             ElevatedButton(
@@ -72,43 +76,43 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: Text('Add New Category'),
+                    title: const Text('Add New Category'),
                     content: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextField(
                           controller: _categoryController,
                           decoration:
-                              InputDecoration(labelText: 'Category Name'),
+                              const InputDecoration(labelText: 'Category Name'),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         _categoryImage == null
-                            ? Text('No image selected')
+                            ? const Text('No image selected')
                             : Image.file(_categoryImage!, height: 100),
                         TextButton(
                           onPressed: _pickImage,
-                          child: Text('Pick Image'),
+                          child: const Text('Pick Image'),
                         ),
                       ],
                     ),
                     actions: [
                       ElevatedButton(
                         onPressed: _addCategory,
-                        child: Text('Add Category'),
+                        child: const Text('Add Category'),
                       ),
                       TextButton(
                         onPressed: () => Navigator.pop(context),
-                        child: Text('Cancel'),
+                        child: const Text('Cancel'),
                       ),
                     ],
                   ),
                 );
               },
-              child: Text('Add Category'),
+              child: const Text('Add Category'),
             ),
             Expanded(
               child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
@@ -124,10 +128,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             ? Image.file(categories[index].image, height: 100)
                             : Container(),
                         Text(categories[index].name,
-                            style: TextStyle(fontSize: 18)),
+                            style: const TextStyle(fontSize: 18)),
                         ElevatedButton(
                           onPressed: () {},
-                          child: Text('Add Service'),
+                          child: const Text('Add Service'),
                         ),
                       ],
                     ),

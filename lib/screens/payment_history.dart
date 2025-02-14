@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:startup/base_o.dart'; // Ensure this file correctly handles navigation and layout
 
 class PaymentHistoryScreen extends StatefulWidget {
+  const PaymentHistoryScreen({super.key});
+
   @override
   _PaymentHistoryScreenState createState() => _PaymentHistoryScreenState();
 }
@@ -46,22 +48,22 @@ class _PaymentHistoryScreenState extends State<PaymentHistoryScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Payment & Billing",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           isLoading
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator())
               : hasError
-                  ? Center(
+                  ? const Center(
                       child: Text("Error loading payments. Try again later."))
                   : Expanded(
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: DataTable(
                           columnSpacing: 16.0,
-                          columns: [
+                          columns: const [
                             DataColumn(label: Text("Transaction ID")),
                             DataColumn(label: Text("Customer Name")),
                             DataColumn(label: Text("Service")),

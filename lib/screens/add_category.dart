@@ -6,6 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:startup/base_o.dart'; // Ensuring navigation integration
 
 class AddCategoryScreen extends StatefulWidget {
+  const AddCategoryScreen({super.key});
+
   @override
   _AddCategoryScreenState createState() => _AddCategoryScreenState();
 }
@@ -63,7 +65,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
       final response = await request.send();
       if (response.statusCode == 201) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Category added successfully")),
+          const SnackBar(content: Text("Category added successfully")),
         );
         setState(() {
           showModal = false;
@@ -76,7 +78,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error adding category")),
+        const SnackBar(content: Text("Error adding category")),
       );
     }
   }
@@ -103,25 +105,25 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                 showModal = true;
               });
             },
-            child: Text("Add Category"),
+            child: const Text("Add Category"),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           isLoading
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator())
               : categories.isEmpty
-                  ? Center(child: Text("No categories available"))
+                  ? const Center(child: Text("No categories available"))
                   : SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: categories.map((category) {
                           return Container(
                             width: 150,
-                            margin: EdgeInsets.symmetric(horizontal: 10),
-                            padding: EdgeInsets.all(10),
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                   color: Colors.black12,
                                   blurRadius: 5,
@@ -139,10 +141,10 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                                     height: 80,
                                     fit: BoxFit.cover,
                                   ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Text(
                                   category['name'],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -156,12 +158,12 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
           if (showModal)
             Center(
               child: Container(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 width: 300,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.black26,
                       blurRadius: 10,
@@ -172,19 +174,20 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("Add New Category",
+                    const Text("Add New Category",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold)),
                     TextField(
                       controller: categoryController,
-                      decoration: InputDecoration(labelText: "Category Name"),
+                      decoration:
+                          const InputDecoration(labelText: "Category Name"),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     ElevatedButton(
                       onPressed: pickImage,
-                      child: Text("Pick Image"),
+                      child: const Text("Pick Image"),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     if (selectedImage != null)
                       Image.file(selectedImage!, width: 100, height: 100),
                     Row(
@@ -192,7 +195,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                       children: [
                         ElevatedButton(
                           onPressed: addCategory,
-                          child: Text("Save"),
+                          child: const Text("Save"),
                         ),
                         ElevatedButton(
                           onPressed: () {
@@ -204,7 +207,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red),
-                          child: Text("Cancel"),
+                          child: const Text("Cancel"),
                         ),
                       ],
                     ),

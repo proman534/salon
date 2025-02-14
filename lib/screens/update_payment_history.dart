@@ -6,7 +6,7 @@ import 'package:startup/base_o.dart'; // Ensure this file correctly handles navi
 class UpdatePaymentStatusScreen extends StatefulWidget {
   final String transactionId;
 
-  UpdatePaymentStatusScreen({required this.transactionId});
+  const UpdatePaymentStatusScreen({super.key, required this.transactionId});
 
   @override
   _UpdatePaymentStatusScreenState createState() =>
@@ -60,7 +60,7 @@ class _UpdatePaymentStatusScreenState extends State<UpdatePaymentStatusScreen> {
 
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Payment status updated successfully")),
+          const SnackBar(content: Text("Payment status updated successfully")),
         );
         Navigator.pop(context); // Go back to payment history
       } else {
@@ -68,7 +68,7 @@ class _UpdatePaymentStatusScreenState extends State<UpdatePaymentStatusScreen> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error updating payment status")),
+        const SnackBar(content: Text("Error updating payment status")),
       );
     }
   }
@@ -77,18 +77,18 @@ class _UpdatePaymentStatusScreenState extends State<UpdatePaymentStatusScreen> {
   Widget build(BuildContext context) {
     return BaseScreen(
       child: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : hasError
-              ? Center(child: Text("Error loading payment details"))
+              ? const Center(child: Text("Error loading payment details"))
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Update Payment Status for ${payment?['transaction_id']}",
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 22, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     DropdownButtonFormField<String>(
                       value: selectedStatus,
                       items: ["Pending", "Completed", "Failed"].map((status) {
@@ -102,20 +102,20 @@ class _UpdatePaymentStatusScreenState extends State<UpdatePaymentStatusScreen> {
                           selectedStatus = value!;
                         });
                       },
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: "Payment Status",
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: updatePaymentStatus,
-                      child: Text("Update Status"),
+                      child: const Text("Update Status"),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: Text("Back to Payment History"),
+                      child: const Text("Back to Payment History"),
                     ),
                   ],
                 ),

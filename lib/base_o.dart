@@ -6,8 +6,9 @@ class BaseScreen extends StatelessWidget {
   final String username;
   final String title;
 
-  BaseScreen(
-      {required this.child,
+  const BaseScreen(
+      {super.key,
+      required this.child,
       this.isAuthenticated = false,
       this.username = '',
       this.title = 'My App'});
@@ -16,12 +17,13 @@ class BaseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My App', style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Color(0xFF1a1a2e),
+        title:
+            const Text('My App', style: TextStyle(fontWeight: FontWeight.bold)),
+        backgroundColor: const Color(0xFF1a1a2e),
         actions: _buildMenuItems(context),
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: child,
       ),
     );
@@ -40,7 +42,7 @@ class BaseScreen extends StatelessWidget {
       ],
       if (isAuthenticated) _navItem('Logout', '/logout'),
       IconButton(
-        icon: Icon(Icons.notifications, color: Colors.white),
+        icon: const Icon(Icons.notifications, color: Colors.white),
         onPressed: () {
           Navigator.pushNamed(context, '/notifications');
         },
@@ -53,7 +55,7 @@ class BaseScreen extends StatelessWidget {
       onPressed: () {},
       child: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
             color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
       ),
     );

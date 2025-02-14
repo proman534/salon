@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:startup/base_o.dart';
 
 class AddPaymentScreen extends StatefulWidget {
+  const AddPaymentScreen({super.key});
+
   @override
   _AddPaymentScreenState createState() => _AddPaymentScreenState();
 }
 
 class _AddPaymentScreenState extends State<AddPaymentScreen> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _amountController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   void _submitPayment() {
     if (_formKey.currentState!.validate()) {
       // Handle form submission (API call or database logic)
       print("Payment added: \${_amountController.text}");
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Payment successfully added!")),
+        const SnackBar(content: Text("Payment successfully added!")),
       );
     }
   }
@@ -26,13 +28,13 @@ class _AddPaymentScreenState extends State<AddPaymentScreen> {
     return BaseScreen(
       title: "Add New Payment",
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Add New Payment",
+            const Text("Add New Payment",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Form(
               key: _formKey,
               child: Column(
@@ -40,7 +42,7 @@ class _AddPaymentScreenState extends State<AddPaymentScreen> {
                   TextFormField(
                     controller: _amountController,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(labelText: "Amount"),
+                    decoration: const InputDecoration(labelText: "Amount"),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Please enter an amount";
@@ -48,10 +50,10 @@ class _AddPaymentScreenState extends State<AddPaymentScreen> {
                       return null;
                     },
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   TextFormField(
                     controller: _descriptionController,
-                    decoration: InputDecoration(labelText: "Description"),
+                    decoration: const InputDecoration(labelText: "Description"),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Please enter a description";
@@ -59,17 +61,17 @@ class _AddPaymentScreenState extends State<AddPaymentScreen> {
                       return null;
                     },
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: _submitPayment,
-                    child: Text("Add Payment"),
+                    child: const Text("Add Payment"),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   TextButton(
                     onPressed: () {
                       Navigator.pushNamed(context, "/payment_history");
                     },
-                    child: Text("Back to Payment History"),
+                    child: const Text("Back to Payment History"),
                   ),
                 ],
               ),
