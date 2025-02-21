@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
 void main() {
-  runApp(SalonDashboard());
+  runApp(const SalonDashboard());
 }
 
 class SalonDashboard extends StatelessWidget {
@@ -11,7 +11,7 @@ class SalonDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: DashboardScreen(),
     );
   }
