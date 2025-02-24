@@ -27,7 +27,7 @@ class _HomePageState extends State<SalonHomePage> {
   // Fetch services data from the backend
   Future<void> fetchServices() async {
     const url =
-        'http://10.0.2.2:5000/api/services'; // Replace with your Flask API URL
+        'http://127.0.0.1:5000/api/services'; // Replace with your Flask API URL
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
