@@ -8,7 +8,8 @@ class DeleteStaffPage extends StatelessWidget {
   final String email;
   final String phone;
 
-  DeleteStaffPage({
+  const DeleteStaffPage({
+    super.key,
     required this.staffId,
     required this.staffName,
     required this.position,
@@ -23,12 +24,12 @@ class DeleteStaffPage extends StatelessWidget {
 
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Staff member deleted successfully!')),
+        const SnackBar(content: Text('Staff member deleted successfully!')),
       );
       Navigator.pop(context);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to delete staff member.')),
+        const SnackBar(content: Text('Failed to delete staff member.')),
       );
     }
   }
@@ -36,15 +37,15 @@ class DeleteStaffPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Delete Staff Member')),
+      appBar: AppBar(title: const Text('Delete Staff Member')),
       body: Center(
         child: Container(
-          padding: EdgeInsets.all(20),
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black12,
                 blurRadius: 8,
@@ -55,7 +56,7 @@ class DeleteStaffPage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 'Delete Staff Member',
                 style: TextStyle(
                   fontSize: 22,
@@ -63,22 +64,23 @@ class DeleteStaffPage extends StatelessWidget {
                   color: Colors.red,
                 ),
               ),
-              SizedBox(height: 15),
-              Text(
+              const SizedBox(height: 15),
+              const Text(
                 'Are you sure you want to delete this staff member?',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16, color: Colors.black87),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Text(
                 'Name: $staffName\n'
                 'Position: $position\n'
                 'Email: $email\n'
                 'Phone: $phone',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -87,7 +89,7 @@ class DeleteStaffPage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                     ),
-                    child: Text('Delete'),
+                    child: const Text('Delete'),
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -96,7 +98,7 @@ class DeleteStaffPage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey,
                     ),
-                    child: Text('Cancel'),
+                    child: const Text('Cancel'),
                   ),
                 ],
               ),

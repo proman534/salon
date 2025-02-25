@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SalonOwnerLoginPage extends StatefulWidget {
+  const SalonOwnerLoginPage({super.key});
+
   @override
   _SalonOwnerLoginPageState createState() => _SalonOwnerLoginPageState();
 }
@@ -25,12 +27,12 @@ class _SalonOwnerLoginPageState extends State<SalonOwnerLoginPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Error"),
+        title: const Text("Error"),
         content: Text(message),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text("OK"),
+            child: const Text("OK"),
           ),
         ],
       ),
@@ -40,10 +42,10 @@ class _SalonOwnerLoginPageState extends State<SalonOwnerLoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF7F7F7),
+      backgroundColor: const Color(0xFFF7F7F7),
       body: Center(
         child: Container(
-          padding: EdgeInsets.all(40),
+          padding: const EdgeInsets.all(40),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
@@ -59,7 +61,7 @@ class _SalonOwnerLoginPageState extends State<SalonOwnerLoginPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 "Salon Owner Login",
                 style: TextStyle(
                   fontSize: 24,
@@ -67,50 +69,50 @@ class _SalonOwnerLoginPageState extends State<SalonOwnerLoginPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
                 controller: _usernameController,
                 decoration: InputDecoration(
                   labelText: "Username",
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                   filled: true,
                   fillColor: Colors.grey[100],
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextField(
                 controller: _passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: "Password",
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                   filled: true,
                   fillColor: Colors.grey[100],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _login,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF007BFF),
-                  padding: EdgeInsets.symmetric(vertical: 12),
+                  backgroundColor: const Color(0xFF007BFF),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
-                child: Center(
+                child: const Center(
                   child: Text(
                     "Login",
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextButton(
                 onPressed: () {
                   print("Navigate to Signup Page");
                 },
-                child: Text(
+                child: const Text(
                   "Don't have an account? Sign up",
                   style: TextStyle(color: Color(0xFF007BFF)),
                 ),

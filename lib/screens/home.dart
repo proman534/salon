@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class BeautySalonHomePage extends StatelessWidget {
+  const BeautySalonHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF5EBE0),
+      backgroundColor: const Color(0xFFF5EBE0),
       appBar: AppBar(
-        backgroundColor: Color(0xFF2E2545),
-        title: Text(
+        backgroundColor: const Color(0xFF2E2545),
+        title: const Text(
           "Beauty Salon",
           style:
               TextStyle(color: Color(0xFFE5B299), fontWeight: FontWeight.bold),
@@ -15,15 +17,16 @@ class BeautySalonHomePage extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {},
-            child: Text("Home", style: TextStyle(color: Colors.white)),
+            child: const Text("Home", style: TextStyle(color: Colors.white)),
           ),
           TextButton(
             onPressed: () {},
-            child: Text("Services", style: TextStyle(color: Colors.white)),
+            child:
+                const Text("Services", style: TextStyle(color: Colors.white)),
           ),
           TextButton(
             onPressed: () {},
-            child: Text("Contact", style: TextStyle(color: Colors.white)),
+            child: const Text("Contact", style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -39,11 +42,11 @@ class BeautySalonHomePage extends StatelessWidget {
           // Dark Overlay
           Positioned.fill(
             child: Container(
-              color: Color(0xFF2E2545).withOpacity(0.6),
+              color: const Color(0xFF2E2545).withOpacity(0.6),
             ),
           ),
           // Centered Text
-          Center(
+          const Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -68,9 +71,9 @@ class BeautySalonHomePage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: Container(
-        color: Color(0xFF2E2545),
-        padding: EdgeInsets.all(16),
-        child: Center(
+        color: const Color(0xFF2E2545),
+        padding: const EdgeInsets.all(16),
+        child: const Center(
           child: Text(
             "© 2025 Beauty Salon - All Rights Reserved",
             style: TextStyle(color: Colors.white),

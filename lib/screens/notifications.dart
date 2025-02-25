@@ -32,7 +32,7 @@ class NotificationsPage extends StatelessWidget {
                 child: DataTable(
                   columnSpacing: 20,
                   headingRowColor:
-                      MaterialStateColor.resolveWith((states) => Colors.blue),
+                      WidgetStateColor.resolveWith((states) => Colors.blue),
                   headingTextStyle: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                   columns: const [
