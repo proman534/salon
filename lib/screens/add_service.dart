@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
+import 'package:mime/mime.dart';
+import 'dart:convert';
 
 void main() {
   runApp(const SalonDashboard());
@@ -29,7 +33,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final TextEditingController _categoryController = TextEditingController();
   File? _categoryImage;
   final picker = ImagePicker();
+  static const String baseUrl = "http://127.0.0.1:5000"; // Flask API URL
 
+  // ✅ Pick Image from Gallery
   void _pickImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
@@ -39,15 +45,49 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
   }
 
-  void _addCategory() {
+  // ✅ Add Category via API
+  Future<void> _addCategory() async {
     if (_categoryController.text.isNotEmpty && _categoryImage != null) {
-      setState(() {
-        categories.add(
-            Category(name: _categoryController.text, image: _categoryImage!));
-      });
-      _categoryController.clear();
-      _categoryImage = null;
-      Navigator.pop(context);
+      try {
+        var request = http.MultipartRequest('POST', Uri.parse('$baseUrl/categories'));
+
+        // Add category name
+        request.fields['name'] = _categoryController.text;
+
+        // Attach image
+        var stream = http.ByteStream(_categoryImage!.openRead());
+        var length = await _categoryImage!.length();
+        var multipartFile = http.MultipartFile(
+          'image',
+          stream,
+          length,
+          filename: basename(_categoryImage!.path),
+          contentType: MediaType.parse(lookupMimeType(_categoryImage!.path) ?? 'image/jpeg'),
+        );
+
+        request.files.add(multipartFile);
+
+        var response = await request.send();
+        var responseData = await response.stream.bytesToString();
+        var jsonResponse = json.decode(responseData);
+
+        if (response.statusCode == 201) {
+          setState(() {
+            categories.add(Category(
+              name: jsonResponse['message'],
+              imageUrl: '$baseUrl' + jsonResponse['image_url'],
+            ));
+          });
+
+          _categoryController.clear();
+          _categoryImage = null;
+          Navigator.pop(context);
+        } else {
+          print('Error: ${response.reasonPhrase}');
+        }
+      } catch (e) {
+        print("Exception while adding category: $e");
+      }
     }
   }
 
@@ -82,8 +122,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       children: [
                         TextField(
                           controller: _categoryController,
-                          decoration:
-                              const InputDecoration(labelText: 'Category Name'),
+                          decoration: const InputDecoration(labelText: 'Category Name'),
                         ),
                         const SizedBox(height: 10),
                         _categoryImage == null
@@ -124,11 +163,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        categories[index].image != null
-                            ? Image.file(categories[index].image, height: 100)
+                        categories[index].imageUrl.isNotEmpty
+                            ? Image.network(categories[index].imageUrl, height: 100)
                             : Container(),
-                        Text(categories[index].name,
-                            style: const TextStyle(fontSize: 18)),
+                        Text(categories[index].name, style: const TextStyle(fontSize: 18)),
                         ElevatedButton(
                           onPressed: () {},
                           child: const Text('Add Service'),
@@ -146,9 +184,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 }
 
+// ✅ Updated Category Model
 class Category {
   final String name;
-  final File image;
+  final String imageUrl;
 
-  Category({required this.name, required this.image});
+  Category({required this.name, required this.imageUrl});
 }
