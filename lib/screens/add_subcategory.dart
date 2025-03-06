@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class AddSubcategoryPage extends StatefulWidget {
+  const AddSubcategoryPage({super.key});
+
   @override
   _AddSubcategoryPageState createState() => _AddSubcategoryPageState();
 }
@@ -42,12 +44,12 @@ class _AddSubcategoryPageState extends State<AddSubcategoryPage> {
       var response = await request.send();
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Subcategory Added Successfully!')),
+          const SnackBar(content: Text('Subcategory Added Successfully!')),
         );
         Navigator.pop(context);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error adding subcategory!')),
+          const SnackBar(content: Text('Error adding subcategory!')),
         );
       }
     }
@@ -56,7 +58,7 @@ class _AddSubcategoryPageState extends State<AddSubcategoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Add Subcategory')),
+      appBar: AppBar(title: const Text('Add Subcategory')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -65,7 +67,8 @@ class _AddSubcategoryPageState extends State<AddSubcategoryPage> {
             children: [
               TextFormField(
                 controller: nameController,
-                decoration: InputDecoration(labelText: 'Subcategory Name'),
+                decoration:
+                    const InputDecoration(labelText: 'Subcategory Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a subcategory name';
@@ -73,25 +76,25 @@ class _AddSubcategoryPageState extends State<AddSubcategoryPage> {
                   return null;
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               _image != null
                   ? Image.file(_image!, height: 100)
-                  : Text('No image selected'),
+                  : const Text('No image selected'),
               ElevatedButton(
                 onPressed: _pickImage,
-                child: Text('Upload Image'),
+                child: const Text('Upload Image'),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _submitForm,
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                child: Text('Save'),
+                child: const Text('Save'),
               ),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('Cancel'),
+                child: const Text('Cancel'),
               ),
             ],
           ),

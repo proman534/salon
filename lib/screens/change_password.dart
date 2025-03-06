@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ChangePasswordPage extends StatefulWidget {
+  const ChangePasswordPage({super.key});
+
   @override
   _ChangePasswordPageState createState() => _ChangePasswordPageState();
 }
@@ -34,7 +36,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Password changed successfully!')),
+          const SnackBar(content: Text('Password changed successfully!')),
         );
         Navigator.pop(context);
       } else {
@@ -48,7 +50,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Change Password')),
+      appBar: AppBar(title: const Text('Change Password')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -59,12 +61,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               if (errorMessage != null)
                 Text(
                   errorMessage!,
-                  style: TextStyle(color: Colors.red),
+                  style: const TextStyle(color: Colors.red),
                 ),
               TextFormField(
                 controller: oldPasswordController,
                 obscureText: true,
-                decoration: InputDecoration(labelText: 'Old Password'),
+                decoration: const InputDecoration(labelText: 'Old Password'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your old password';
@@ -75,7 +77,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               TextFormField(
                 controller: newPasswordController,
                 obscureText: true,
-                decoration: InputDecoration(labelText: 'New Password'),
+                decoration: const InputDecoration(labelText: 'New Password'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a new password';
@@ -86,7 +88,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               TextFormField(
                 controller: confirmPasswordController,
                 obscureText: true,
-                decoration: InputDecoration(labelText: 'Confirm New Password'),
+                decoration:
+                    const InputDecoration(labelText: 'Confirm New Password'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please confirm your new password';
@@ -94,17 +97,17 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _changePassword,
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                child: Text('Change Password'),
+                child: const Text('Change Password'),
               ),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('Back'),
+                child: const Text('Back'),
               ),
             ],
           ),

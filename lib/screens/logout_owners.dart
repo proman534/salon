@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: const Text("Home"),
         backgroundColor: Colors.blue,
       ),
       body: Center(
@@ -18,9 +18,9 @@ class HomePage extends StatelessWidget {
           children: [
             Text(
               "Welcome, $username!",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Handle logout logic here
@@ -28,9 +28,10 @@ class HomePage extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               ),
-              child: Text(
+              child: const Text(
                 "Logout",
                 style: TextStyle(fontSize: 16, color: Colors.white),
               ),

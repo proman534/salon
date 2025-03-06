@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
 class EditServicePage extends StatefulWidget {
+  const EditServicePage({super.key});
+
   @override
   _EditServicePageState createState() => _EditServicePageState();
 }
@@ -45,12 +47,12 @@ class _EditServicePageState extends State<EditServicePage> {
 
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Service updated successfully!')),
+          const SnackBar(content: Text('Service updated successfully!')),
         );
         Navigator.pop(context);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to update service.')),
+          const SnackBar(content: Text('Failed to update service.')),
         );
       }
     }
@@ -60,17 +62,17 @@ class _EditServicePageState extends State<EditServicePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Service'),
+        title: const Text('Edit Service'),
         backgroundColor: Colors.blue,
       ),
       body: Center(
         child: Container(
-          padding: EdgeInsets.all(20),
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black12,
                 blurRadius: 8,
@@ -84,44 +86,44 @@ class _EditServicePageState extends State<EditServicePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
+                  const Center(
                     child: Text(
                       'Edit Service',
                       style:
                           TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   _buildInputField('Service Name', nameController),
                   _buildInputField('Time Required', timeRequiredController),
                   _buildInputField('Description', descriptionController,
                       isMultiline: true),
                   _buildInputField('Price', priceController,
                       inputType: TextInputType.number),
-                  SizedBox(height: 15),
-                  Text('Service Image',
+                  const SizedBox(height: 15),
+                  const Text('Service Image',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.blue)),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   _image == null
-                      ? Text('No image selected')
+                      ? const Text('No image selected')
                       : Image.file(_image!, height: 100),
                   TextButton(
                     onPressed: _pickImage,
-                    child: Text('Choose Image',
+                    child: const Text('Choose Image',
                         style: TextStyle(color: Colors.blue)),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: _updateService,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
-                      padding: EdgeInsets.symmetric(vertical: 12),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
                     ),
-                    child: Center(child: Text('Update Service')),
+                    child: const Center(child: Text('Update Service')),
                   ),
                 ],
               ),
@@ -136,19 +138,19 @@ class _EditServicePageState extends State<EditServicePage> {
       {bool isMultiline = false,
       TextInputType inputType = TextInputType.text}) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.only(bottom: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label,
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
-          SizedBox(height: 5),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.blue)),
+          const SizedBox(height: 5),
           TextFormField(
             controller: controller,
             keyboardType: inputType,
             maxLines: isMultiline ? 4 : 1,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               contentPadding:
                   EdgeInsets.symmetric(vertical: 10, horizontal: 15),

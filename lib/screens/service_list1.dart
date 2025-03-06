@@ -7,6 +7,8 @@ void main() {
 }
 
 class SalonDashboard extends StatelessWidget {
+  const SalonDashboard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,6 +20,8 @@ class SalonDashboard extends StatelessWidget {
 }
 
 class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
+
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
@@ -53,16 +57,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Add New Category'),
+          title: const Text('Add New Category'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                   controller: nameController,
-                  decoration: InputDecoration(labelText: 'Category Name')),
+                  decoration:
+                      const InputDecoration(labelText: 'Category Name')),
               ElevatedButton(
                 onPressed: _pickImage,
-                child: Text('Upload Image'),
+                child: const Text('Upload Image'),
               ),
             ],
           ),
@@ -74,7 +79,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 });
                 Navigator.pop(context);
               },
-              child: Text('Add'),
+              child: const Text('Add'),
             ),
           ],
         );
@@ -91,19 +96,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Add New Service'),
+          title: const Text('Add New Service'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                   controller: nameController,
-                  decoration: InputDecoration(labelText: 'Service Name')),
+                  decoration: const InputDecoration(labelText: 'Service Name')),
               TextField(
                   controller: priceController,
-                  decoration: InputDecoration(labelText: 'Price')),
+                  decoration: const InputDecoration(labelText: 'Price')),
               TextField(
                   controller: timeController,
-                  decoration: InputDecoration(labelText: 'Time')),
+                  decoration: const InputDecoration(labelText: 'Time')),
             ],
           ),
           actions: [
@@ -118,7 +123,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 });
                 Navigator.pop(context);
               },
-              child: Text('Add'),
+              child: const Text('Add'),
             ),
           ],
         );
@@ -147,14 +152,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Salon Dashboard')),
+      appBar: AppBar(title: const Text('Salon Dashboard')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             ElevatedButton(
               onPressed: () => _addCategory(context),
-              child: Text('+ Add New Category'),
+              child: const Text('+ Add New Category'),
             ),
             Expanded(
               child: ListView.builder(
@@ -164,7 +169,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   return Card(
                     elevation: 3,
                     child: Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -172,18 +177,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(category.name,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold)),
                               Row(
                                 children: [
                                   IconButton(
-                                    icon: Icon(Icons.add, color: Colors.green),
+                                    icon: const Icon(Icons.add,
+                                        color: Colors.green),
                                     onPressed: () =>
                                         _addService(context, category),
                                   ),
                                   IconButton(
-                                    icon: Icon(Icons.delete, color: Colors.red),
+                                    icon: const Icon(Icons.delete,
+                                        color: Colors.red),
                                     onPressed: () => _deleteCategory(index),
                                   ),
                                 ],
@@ -193,7 +200,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           if (_selectedImage != null)
                             Image.file(_selectedImage!,
                                 width: 100, height: 100, fit: BoxFit.cover),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           ...category.services.map((service) => ListTile(
                                 title: Text(service.name),
                                 subtitle:
@@ -207,8 +214,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                           _toggleServiceStatus(service),
                                     ),
                                     IconButton(
-                                      icon:
-                                          Icon(Icons.delete, color: Colors.red),
+                                      icon: const Icon(Icons.delete,
+                                          color: Colors.red),
                                       onPressed: () => _deleteService(category,
                                           category.services.indexOf(service)),
                                     ),

@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class AddStaffPage extends StatefulWidget {
+  const AddStaffPage({super.key});
+
   @override
   _AddStaffPageState createState() => _AddStaffPageState();
 }
@@ -45,12 +47,12 @@ class _AddStaffPageState extends State<AddStaffPage> {
       var response = await request.send();
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Staff Member Added Successfully!')),
+          const SnackBar(content: Text('Staff Member Added Successfully!')),
         );
         Navigator.pop(context);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error adding staff member!')),
+          const SnackBar(content: Text('Error adding staff member!')),
         );
       }
     }
@@ -59,7 +61,7 @@ class _AddStaffPageState extends State<AddStaffPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Add Staff Member')),
+      appBar: AppBar(title: const Text('Add Staff Member')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -68,7 +70,7 @@ class _AddStaffPageState extends State<AddStaffPage> {
             children: [
               TextFormField(
                 controller: nameController,
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a name';
@@ -78,7 +80,7 @@ class _AddStaffPageState extends State<AddStaffPage> {
               ),
               TextFormField(
                 controller: emailController,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(labelText: 'Email'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter an email';
@@ -86,24 +88,24 @@ class _AddStaffPageState extends State<AddStaffPage> {
                   return null;
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               _image != null
                   ? Image.file(_image!, height: 100)
-                  : Text('No image selected'),
+                  : const Text('No image selected'),
               ElevatedButton(
                 onPressed: _pickImage,
-                child: Text('Pick Image'),
+                child: const Text('Pick Image'),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _submitForm,
-                child: Text('Save'),
+                child: const Text('Save'),
               ),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('Cancel'),
+                child: const Text('Cancel'),
               ),
             ],
           ),

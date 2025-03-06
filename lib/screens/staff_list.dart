@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class StaffListPage extends StatefulWidget {
+  const StaffListPage({super.key});
+
   @override
   _StaffListPageState createState() => _StaffListPageState();
 }
@@ -28,11 +30,11 @@ class _StaffListPageState extends State<StaffListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Staff Members"),
+        title: const Text("Staff Members"),
         backgroundColor: Colors.green[700], // Similar to btn-primary color
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             Expanded(
@@ -70,7 +72,7 @@ class _StaffListPageState extends State<StaffListPage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "No staff members found.",
                             style:
                                 TextStyle(fontSize: 18, color: Colors.black54),
@@ -79,23 +81,24 @@ class _StaffListPageState extends State<StaffListPage> {
                             onPressed: () {
                               // Navigate to add staff page (Implement later)
                             },
-                            child: Text("Add a staff member"),
+                            child: const Text("Add a staff member"),
                           ),
                         ],
                       ),
                     ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
                 // Navigate to Add Staff Page (Implement later)
               },
-              child: Text("Add Staff"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green[700],
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                textStyle: TextStyle(fontSize: 18),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                textStyle: const TextStyle(fontSize: 18),
               ),
+              child: Text("Add Staff"),
             ),
           ],
         ),
@@ -114,7 +117,8 @@ class StaffCard extends StatelessWidget {
   final VoidCallback onEdit;
   final VoidCallback onDelete;
 
-  StaffCard({
+  const StaffCard({
+    super.key,
     required this.name,
     required this.photoUrl,
     required this.position,
@@ -130,7 +134,7 @@ class StaffCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 4,
       child: Padding(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -138,10 +142,10 @@ class StaffCard extends StatelessWidget {
               radius: 40,
               backgroundImage: NetworkImage(photoUrl),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               name,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Text("Position: $position"),
             Text("Email: $email"),
@@ -151,11 +155,13 @@ class StaffCard extends StatelessWidget {
               children: [
                 TextButton(
                   onPressed: onEdit,
-                  child: Text("Edit", style: TextStyle(color: Colors.blue)),
+                  child:
+                      const Text("Edit", style: TextStyle(color: Colors.blue)),
                 ),
                 TextButton(
                   onPressed: onDelete,
-                  child: Text("Delete", style: TextStyle(color: Colors.red)),
+                  child:
+                      const Text("Delete", style: TextStyle(color: Colors.red)),
                 ),
               ],
             ),

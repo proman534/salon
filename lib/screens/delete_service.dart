@@ -8,7 +8,8 @@ class DeleteServicePage extends StatelessWidget {
   final String description;
   final double price;
 
-  DeleteServicePage({
+  const DeleteServicePage({
+    super.key,
     required this.serviceId,
     required this.serviceName,
     required this.timeRequired,
@@ -23,12 +24,12 @@ class DeleteServicePage extends StatelessWidget {
 
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Service deleted successfully!')),
+        const SnackBar(content: Text('Service deleted successfully!')),
       );
       Navigator.pop(context);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to delete service.')),
+        const SnackBar(content: Text('Failed to delete service.')),
       );
     }
   }
@@ -36,15 +37,15 @@ class DeleteServicePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Delete Service')),
+      appBar: AppBar(title: const Text('Delete Service')),
       body: Center(
         child: Container(
-          padding: EdgeInsets.all(20),
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black12,
                 blurRadius: 8,
@@ -55,7 +56,7 @@ class DeleteServicePage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 'Delete Service',
                 style: TextStyle(
                   fontSize: 22,
@@ -63,22 +64,23 @@ class DeleteServicePage extends StatelessWidget {
                   color: Colors.red,
                 ),
               ),
-              SizedBox(height: 15),
-              Text(
+              const SizedBox(height: 15),
+              const Text(
                 'Are you sure you want to delete the following service?',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16, color: Colors.black87),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Text(
                 'Service Name: $serviceName\n'
                 'Time Required: $timeRequired\n'
                 'Description: $description\n'
                 'Price: \$$price',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -87,7 +89,7 @@ class DeleteServicePage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                     ),
-                    child: Text('Delete'),
+                    child: const Text('Delete'),
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -96,7 +98,7 @@ class DeleteServicePage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey,
                     ),
-                    child: Text('Cancel'),
+                    child: const Text('Cancel'),
                   ),
                 ],
               ),

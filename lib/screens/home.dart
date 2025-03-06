@@ -1,208 +1,161 @@
-import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-class SalonHomePage extends StatefulWidget {
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
-  _SalonHomePageState createState() => _SalonHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _SalonHomePageState extends State<SalonHomePage> {
-  final TextEditingController _searchController = TextEditingController();
-  List<dynamic> _nearbySalons = [];
-  List<dynamic> _searchSuggestions = [];
-  List<String> _cities = [
-    'New York', 'Los Angeles', 'Chicago',
-    'Houston', 'Phoenix', 'Philadelphia'
-  ];
-  List<Map<String, String>> _categories = [
-    {'name': 'HAIR', 'icon': '💇'},
-    {'name': 'NAILS', 'icon': '💅'},
-    {'name': 'BEARD', 'icon': '👨'},
-    {'name': 'FEET', 'icon': '👣'},
-    {'name': 'MAKEUP', 'icon': '💄'},
-  ];
+class _HomePageState extends State<HomePage> {
+  List<Service> services = [];
+  bool isLoading = true;
+  String baseUrl =
+      "http://127.0.0.1:5000/"; // Replace with your actual backend URL
 
   @override
   void initState() {
     super.initState();
-    _fetchNearbySalons();
-    _searchController.addListener(_onSearchChanged);
+    fetchServices();
   }
 
-  Future<void> _fetchNearbySalons() async {
+  Future<void> fetchServices() async {
     try {
-      // Request location permissions
-      LocationPermission permission = await Geolocator.requestPermission();
-
-      if (permission == LocationPermission.denied) {
-        // Handle location permission denied
-        return;
-      }
-
-      // Get current position
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high
-      );
-
-      // Call backend API to get nearby salons
-      final response = await http.get(
-          Uri.parse('/api/nearby_salons?lat=${position.latitude}&lon=${position.longitude}')
-      );
+      final response = await http.get(Uri.parse("$baseUrl/api/services"));
 
       if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(response.body);
         setState(() {
-          _nearbySalons = json.decode(response.body)['salons'];
+          services = data.map((item) => Service.fromJson(item)).toList();
+          isLoading = false;
         });
+      } else {
+        throw Exception("Failed to load services");
       }
     } catch (e) {
-      print('Error fetching nearby salons: $e');
-    }
-  }
-
-  void _onSearchChanged() {
-    // Implement search suggestions logic
-    if (_searchController.text.isNotEmpty) {
-      _fetchSearchSuggestions(_searchController.text);
-    } else {
       setState(() {
-        _searchSuggestions = [];
+        isLoading = false;
       });
-    }
-  }
-
-  Future<void> _fetchSearchSuggestions(String query) async {
-    try {
-      final response = await http.get(
-          Uri.parse('/api/search_suggestions?query=$query')
-      );
-
-      if (response.statusCode == 200) {
-        setState(() {
-          _searchSuggestions = json.decode(response.body)['suggestions'];
-        });
-      }
-    } catch (e) {
-      print('Error fetching search suggestions: $e');
+      print("Error fetching services: $e");
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF5EBE0),
       appBar: AppBar(
-        title: Text('Salon Finder'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.location_on),
-            onPressed: _fetchNearbySalons,
-          )
-        ],
+        backgroundColor: const Color(0xFF2E2545),
+        title: const Text(
+          "Beauty Salon",
+          style:
+              TextStyle(color: Color(0xFFE5B299), fontWeight: FontWeight.bold),
+        ),
       ),
       body: Column(
         children: [
-          // Search Bar with Suggestions
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: 'Search salons, services...',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+          // Header Section
+          Stack(
+            children: [
+              Positioned.fill(
+                child: Image.network(
+                  "$baseUrl/images/salon_background.jpg", // Fetch background from backend
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      Container(color: Colors.grey), // Handle errors
                 ),
               ),
-            ),
-          ),
-
-          // Search Suggestions
-          if (_searchSuggestions.isNotEmpty)
-            Container(
-              height: 50,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: _searchSuggestions.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Chip(
-                      label: Text(_searchSuggestions[index]),
-                    ),
-                  );
-                },
+              Positioned.fill(
+                child:
+                    Container(color: const Color(0xFF2E2545).withOpacity(0.6)),
               ),
-            ),
-
-          // Cities Horizontal Scroll
-          Container(
-            height: 60,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: _cities.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Navigate to salons in this city
-                    },
-                    child: Text(_cities[index]),
-                  ),
-                );
-              },
-            ),
-          ),
-
-          // Categories Horizontal Scroll
-          Container(
-            height: 100,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: _categories.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      // Navigate to category details
-                    },
-                    child: Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 30,
-                          child: Text(_categories[index]['icon']!, style: TextStyle(fontSize: 30)),
-                        ),
-                        SizedBox(height: 5),
-                        Text(_categories[index]['name']!)
-                      ],
+              const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Welcome to Beauty Salon",
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFE5B299)),
+                      textAlign: TextAlign.center,
                     ),
-                  ),
-                );
-              },
-            ),
+                    SizedBox(height: 10),
+                    Text(
+                      "Experience luxury, elegance, and style in every visit.",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
+          const SizedBox(height: 20),
 
-          // Nearby Salons
+          // Services List
           Expanded(
-            child: ListView.builder(
-              itemCount: _nearbySalons.length,
-              itemBuilder: (context, index) {
-                var salon = _nearbySalons[index];
-                return ListTile(
-                  title: Text(salon['name']),
-                  subtitle: Text('${salon['distance']} km away'),
-                  trailing: Icon(Icons.arrow_forward_ios),
-                  onTap: () {
-                    // Navigate to salon details
-                  },
-                );
-              },
-            ),
+            child: isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    itemCount: services.length,
+                    itemBuilder: (context, index) {
+                      final service = services[index];
+                      return Card(
+                        elevation: 3,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        child: ListTile(
+                          leading: Image.network(
+                            "$baseUrl/${service.imageName}",
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                const Icon(Icons.image_not_supported,
+                                    color: Colors.grey),
+                          ),
+                          title: Text(service.name,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                      );
+                    },
+                  ),
           ),
         ],
       ),
+      bottomNavigationBar: Container(
+        color: const Color(0xFF2E2545),
+        padding: const EdgeInsets.all(16),
+        child: const Center(
+          child: Text(
+            "© 2025 Beauty Salon - All Rights Reserved",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// Service Model
+class Service {
+  final int id;
+  final String imageName;
+  final String name;
+
+  Service({required this.id, required this.imageName, required this.name});
+
+  factory Service.fromJson(Map<String, dynamic> json) {
+    return Service(
+      id: json['id'],
+      imageName: json['image_name'],
+      name: json['name'],
     );
   }
 }

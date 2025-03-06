@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class EditProfilePage extends StatefulWidget {
+  const EditProfilePage({super.key});
+
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
@@ -42,12 +44,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Profile updated successfully!')),
+          const SnackBar(content: Text('Profile updated successfully!')),
         );
         Navigator.pop(context);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to update profile.')),
+          const SnackBar(content: Text('Failed to update profile.')),
         );
       }
     }
@@ -56,15 +58,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Edit Profile')),
+      appBar: AppBar(title: const Text('Edit Profile')),
       body: Center(
         child: Container(
-          padding: EdgeInsets.all(20),
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black12,
                 blurRadius: 8,
@@ -78,14 +80,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
+                  const Center(
                     child: Text(
                       'Edit Your Profile',
                       style:
                           TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   _buildInputField('First Name', firstNameController),
                   _buildInputField('Last Name', lastNameController),
                   _buildInputField('Email', emailController),
@@ -97,25 +99,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   _buildInputField('Pin Code', pinCodeController),
                   _buildInputField('Country', countryController),
                   _buildInputField('Gender', genderController),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: _saveChanges,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
-                      padding: EdgeInsets.symmetric(vertical: 12),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
                     ),
-                    child: Center(child: Text('Save Changes')),
+                    child: const Center(child: Text('Save Changes')),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Center(
                     child: TextButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: Text('Back to Profile',
+                      child: const Text('Back to Profile',
                           style: TextStyle(color: Colors.blue)),
                     ),
                   ),
@@ -130,17 +132,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   Widget _buildInputField(String label, TextEditingController controller) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.only(bottom: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label,
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
-          SizedBox(height: 5),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.blue)),
+          const SizedBox(height: 5),
           TextFormField(
             controller: controller,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               contentPadding:
                   EdgeInsets.symmetric(vertical: 10, horizontal: 15),

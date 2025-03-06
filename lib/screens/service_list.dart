@@ -7,6 +7,8 @@ void main() {
 }
 
 class ManageServicesApp extends StatelessWidget {
+  const ManageServicesApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,6 +19,8 @@ class ManageServicesApp extends StatelessWidget {
 }
 
 class ManageServicesPage extends StatefulWidget {
+  const ManageServicesPage({super.key});
+
   @override
   _ManageServicesPageState createState() => _ManageServicesPageState();
 }
@@ -32,15 +36,15 @@ class _ManageServicesPageState extends State<ManageServicesPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Add Category'),
+          title: const Text('Add Category'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: categoryController,
-                decoration: InputDecoration(labelText: 'Category Name'),
+                decoration: const InputDecoration(labelText: 'Category Name'),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () async {
                   final pickedFile = await ImagePicker()
@@ -51,17 +55,17 @@ class _ManageServicesPageState extends State<ManageServicesPage> {
                     });
                   }
                 },
-                child: Text("Upload Image"),
+                child: const Text("Upload Image"),
               ),
             ],
           ),
           actions: [
             TextButton(
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
               onPressed: () => Navigator.pop(context),
             ),
             ElevatedButton(
-              child: Text('Add'),
+              child: const Text('Add'),
               onPressed: () {
                 if (categoryController.text.isNotEmpty) {
                   setState(() {
@@ -93,25 +97,27 @@ class _ManageServicesPageState extends State<ManageServicesPage> {
             children: [
               TextField(
                 controller: nameController,
-                decoration: InputDecoration(labelText: 'Service Name'),
+                decoration: const InputDecoration(labelText: 'Service Name'),
               ),
               TextField(
                 controller: timeController,
-                decoration: InputDecoration(labelText: 'Time (e.g., 30 mins)'),
+                decoration:
+                    const InputDecoration(labelText: 'Time (e.g., 30 mins)'),
               ),
               TextField(
                 controller: costController,
-                decoration: InputDecoration(labelText: 'Cost (e.g., \$50)'),
+                decoration:
+                    const InputDecoration(labelText: 'Cost (e.g., \$50)'),
               ),
             ],
           ),
           actions: [
             TextButton(
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
               onPressed: () => Navigator.pop(context),
             ),
             ElevatedButton(
-              child: Text('Add'),
+              child: const Text('Add'),
               onPressed: () {
                 if (nameController.text.isNotEmpty &&
                     timeController.text.isNotEmpty &&
@@ -148,15 +154,15 @@ class _ManageServicesPageState extends State<ManageServicesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          AppBar(title: Text("Manage Services"), backgroundColor: Colors.blue),
+      appBar: AppBar(
+          title: const Text("Manage Services"), backgroundColor: Colors.blue),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             ElevatedButton(
               onPressed: _showCategoryDialog,
-              child: Text("Add Category"),
+              child: const Text("Add Category"),
             ),
             Expanded(
               child: ListView.builder(
@@ -164,9 +170,9 @@ class _ManageServicesPageState extends State<ManageServicesPage> {
                 itemBuilder: (context, index) {
                   Category category = categories[index];
                   return Card(
-                    margin: EdgeInsets.symmetric(vertical: 10),
+                    margin: const EdgeInsets.symmetric(vertical: 10),
                     child: Padding(
-                      padding: EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(12),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -180,25 +186,27 @@ class _ManageServicesPageState extends State<ManageServicesPage> {
                               Align(
                                 alignment: Alignment.topRight,
                                 child: IconButton(
-                                  icon: Icon(Icons.delete, color: Colors.red),
+                                  icon: const Icon(Icons.delete,
+                                      color: Colors.red),
                                   onPressed: () => _deleteCategory(category),
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Text(category.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold)),
                           ElevatedButton(
                             onPressed: () => _showServiceDialog(category),
-                            child: Text("Add Service"),
+                            child: const Text("Add Service"),
                           ),
                           ...category.services.map((service) => ListTile(
                                 title: Text(
                                     "${service.name} - ${service.time} - ${service.cost}"),
                                 trailing: IconButton(
-                                  icon: Icon(Icons.delete, color: Colors.red),
+                                  icon: const Icon(Icons.delete,
+                                      color: Colors.red),
                                   onPressed: () =>
                                       _deleteService(category, service),
                                 ),
